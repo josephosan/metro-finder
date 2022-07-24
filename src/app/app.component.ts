@@ -1,3 +1,4 @@
+import { MapComponent } from './map/map.component';
 import { SuccessResultComponent } from './success-result/success-result.component';
 import { CoordinatesService } from './services/coordinates.service';
 import { ExplanationComponent } from './explanation/explanation.component';
@@ -41,8 +42,8 @@ export class AppComponent implements OnInit {
       data: `نحوه استفاده:
  
       اول وارد یک برنامه تو گوشیتون میشید، (اینجا پیشفرض گوگل مپس در نظر گرفته میشه) حالا هر مکانی رو که می‌خواید انتخاب کنید و روش نگه دارید تا انتخاب بشه، اگه به بالای صفحه دقت کنید مختصات رو می‌بینید که به صورت یکسری عدد، که با کاما از هم جدا شدن هست؛
-      حالا اونو کپی کنید و قرار بدید تو سایت. 
-      به همین راحتی.`,
+      حالا اونو کپی کنید(روش یبار بزنید تا باز بشه بعد کپی کنید) و قرار بدید تو سایت. 
+      به همین راحتی🤝.`,
       width: "30rem",
       panelClass: 'background-color-changer'
     });
@@ -84,9 +85,16 @@ export class AppComponent implements OnInit {
 
   onVPNClick() {
     this.matDialog.open(ExplanationComponent, {
-      data: `پول نداریم سرور بگیریم، از سرورهای رایگان خارجی استفاده میکنیم که فیلترن.`,
+      data: `پول نداریم سرور بگیریم😤، از سرورهای رایگان خارجی استفاده میکنیم که فیلترن😑.`,
       width: "30rem",
       panelClass: 'background-color-changer'
+    });
+  }
+
+  onMapClick() {
+    this.matDialog.open(MapComponent, {
+      data: '',
+      width: "50rem"
     });
   }
 

@@ -22,6 +22,7 @@
           </div>
   
         <button class="btn btn-success button-styling">محاسبه کن!</button>
+        <button class="btn btn-secondary button-styling" style="margin-right: 0.5rem;" type="button" (click)="onMapClick()">میخوام رو نقشه پیدا کنم!</button>
         <button class="btn btn-danger button-styling" style="margin-right: 0.5rem;" type="button" (click)="onUsageClick()">چطوریه؟</button>
       </form>
   
@@ -42,7 +43,7 @@
         <div class="alert alert-success div-hover" style="cursor: pointer;" (click)="onWhyClick()">
           اصلا چرا باید از این برنامه استفاده کنم؟
         </div>
-        <div class="alert alert-success">
+        <div class="alert alert-success" *ngIf="countUsers !== ''">
           من تا الان {{ countUsers }} مختصات رو میشناسم
         </div>
       </div>

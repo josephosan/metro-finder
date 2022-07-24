@@ -10,13 +10,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ExplanationComponent } from './explanation/explanation.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SuccessResultComponent } from './success-result/success-result.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InputLabelComponent,
     ExplanationComponent,
-    SuccessResultComponent
+    SuccessResultComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
