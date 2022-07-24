@@ -1,10 +1,129 @@
-import { Component } from '@angular/core';
+import { SuccessResultComponent } from './success-result/success-result.component';
+import { CoordinatesService } from './services/coordinates.service';
+import { ExplanationComponent } from './explanation/explanation.component';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { FormGroup, FormControl } from '@angular/forms';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'metro-finder';
+  errField: string = '';
+  doneProc: string = 'done';
+  countUsers: string = '';
+
+  ngOnInit(): void {
+    this.countUsersInDataBase();
+  }
+
+  constructor(private matDialog: MatDialog
+            , private coordinateService: CoordinatesService) {
+  }
+
+  // metro form:
+  metroForm = new FormGroup({
+    coordinate: new FormControl()
+  });
+
+  // getting form data: 
+  get coordinate() {
+    return this.metroForm.get('coordinate');
+  }
+
+  // click events:
+  onUsageClick() {
+    this.matDialog.open(ExplanationComponent, {
+      data: `نحوه استفاده:
+ 
+      اول وارد یک برنامه تو گوشیتون میشید، (اینجا پیشفرض گوگل مپس در نظر گرفته میشه) حالا هر مکانی رو که می‌خواید انتخاب کنید و روش نگه دارید تا انتخاب بشه، اگه به بالای صفحه دقت کنید مختصات رو می‌بینید که به صورت یکسری عدد، که با کاما از هم جدا شدن هست؛
+      حالا اونو کپی کنید و قرار بدید تو سایت. 
+      به همین راحتی.`,
+      width: "30rem",
+      panelClass: 'background-color-changer'
+    });
+  }
+
+  onWhyClick() {
+    this.matDialog.open(ExplanationComponent, {
+      data: `اصلا چرا باید از این برنامه استفاده کنم؟
+
+      خب، فرض کنید، به شما یک لکیشن دادن و میخواد به یک جایی توی تهران برید، و به یک سری از دلایل مثل طرح ترافیک یا شلوغی تهران نمیخواید از ماشین استفاده کنید و نتیجه میگیرید که استفاده از مترو سریعترین راهه. اینجاست که این برنامه به کمکتون میاد. کافیه با هر برنامه ای که دوست دارید(مثلا گوگل مپس) مختصات اون جایی که هستین رو تو این سایت وارد کنید و «محاسبه کن» رو بزنید، و حالا این برنامه نزدیکترین ایستگاه مترو رو به همراه یسری اطلاعات دیگه بهتون میگه😁.
+      
+      خب چرا از گوگل مپس استفاده نکنم برای این کار؟ 
+      
+      اولا گوگل مپس به طور مستقیم یک همچین چیزی نداره، یعنی شما باید بدونید به چه ایستگاهی می‌خواین برین و این برنامه اینو بهتون میگه🙃🙂
+      دوماً شما ایرانی هستین خب یکم حمایت کنین😑`,
+      width: "30rem",
+      panelClass: 'background-color-changer'
+    });
+  }
+
+  onContactClick() {
+    this.matDialog.open(ExplanationComponent, {
+      data: `برای ارتباط با من به این جیمیل پیام بدین
+      josephosan1381@gmail.com
+      یا با این ایدی تو تلگرام منو پیدا کنین
+      josephosan@`,
+      width: "30rem",
+      panelClass: 'background-color-changer'
+    });
+  }
+
+  onApiClick() {
+    this.matDialog.open(ExplanationComponent, {
+      data: `در این برنامه از یک Api به نام metro-finder استفاده شده که رایگان هم هست، در این Api مختصات همه مترو های تهران به صورت decimal در دسترس عموم هست. برای اطلاعات بیشتر به https://github.com/josephosan/metro-finder-api مراجعه کنید.`,
+      width: "30rem",
+      panelClass: 'background-color-changer'
+    });
+  }
+
+  onVPNClick() {
+    this.matDialog.open(ExplanationComponent, {
+      data: `پول نداریم سرور بگیریم، از سرورهای رایگان خارجی استفاده میکنیم که فیلترن.`,
+      width: "30rem",
+      panelClass: 'background-color-changer'
+    });
+  }
+
+  // submit button:
+  onSubmit(data: FormGroup) {
+    this.errField = '';
+    this.doneProc = '';
+    this.coordinateService.postData(data.value).subscribe(
+      (res) => {
+        this.doneProc = 'done';
+        this.matDialog.open(SuccessResultComponent, {
+          data: res,
+          width: "30rem"
+        });
+        
+        data.reset();
+        this.countUsersInDataBase();
+      },
+      (err) => {
+        this.doneProc = 'done';
+        if(err.status === 400) {
+          this.errField = 'با الگو همخوانی ندارد!';
+        } else if(err.status === 500) {
+          this.errField = 'خطای سرور داخلی!'
+        }
+      }
+    )
+  }
+
+  countUsersInDataBase() {
+    this.coordinateService.getData().subscribe(
+      (res: any) => {
+        this.countUsers = res.count;
+      }, 
+      (err) => {
+        console.log(err);
+      }
+    )
+  }
 }
