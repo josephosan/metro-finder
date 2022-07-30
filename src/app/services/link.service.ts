@@ -8,6 +8,6 @@ import { Injectable } from '@angular/core';
 export class LinkService extends DataService {
 
   constructor(http: HttpClient) {
-    super('http://176.97.218.208:3000/api/link-coordinates', http);
+    super('https://josephosan.info/api/metro-finder/link-coordinates', http);
   }
 }
