@@ -1,0 +1,28 @@
+<div class="container font-style" style="text-align: center;">
+  <button class="btn btn-close" style="margin-bottom: 1rem;" (click)="onCloseClick()"></button>
+  <div class="alert alert-warning">
+    به علت محاسبات سنگین‌تر، استفاده از لینک یکم بیشتر طول میکشه!
+  </div>
+  <div class="alert alert-success">
+    لینک رو کپی کنید و اینجا 👇 قرار بدید.
+  </div>
+
+  <form class="col-sm" [formGroup]="metroForm" (ngSubmit)="onSubmit(metroForm)">
+    <div class="alert alert-danger" *ngIf="errField !== ''" style="max-width: 30rem;">
+      {{ errField }}
+    </div>
+    <input
+      placeholder="لینک"
+      type="text"
+      formControlName="link"
+      class="form form-control"
+      style="max-width: 30rem;">
+
+    <div class="alert alert-success" *ngIf="doneProc !== 'done'" style="max-width: 30rem;margin-top: 2rem;margin-bottom: 0;">
+      در حال محاسبه...
+    </div>
+
+      
+    <button class="btn btn-success" style="margin-top: 1rem;">محاسبه کن!</button>
+  </form>
+</div>

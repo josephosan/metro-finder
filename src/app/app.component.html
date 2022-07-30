@@ -6,7 +6,7 @@
   
       <!-- the form -->
       <form class="col-sm" [formGroup]="metroForm" (ngSubmit)="onSubmit(metroForm)">
-        <h1 style="margin-bottom: 3rem;color: white;">نزدیکترین ایستگاه مترو</h1>
+        <h1 style="margin-bottom: 3rem;color: white;">نزدیکترین ایستگاه مترو به شما</h1>
         <div class="alert alert-danger" *ngIf="errField !== ''" style="max-width: 30rem;">
           {{ errField }}
         </div>
@@ -22,15 +22,15 @@
           </div>
   
         <button class="btn btn-success button-styling">محاسبه کن!</button>
-        <button class="btn btn-secondary button-styling" style="margin-right: 0.5rem;" type="button" (click)="onMapClick()">میخوام رو نقشه پیدا کنم!</button>
+        <button class="btn btn-primary button-styling" style="margin-right: 0.5rem;" type="button" (click)="onLinkClick()">از لینک استفاده میکنم</button>
         <button class="btn btn-danger button-styling" style="margin-right: 0.5rem;" type="button" (click)="onUsageClick()">چطوریه؟</button>
       </form>
   
       <!-- explanation -->
       <div class="col-sm" style="max-width: 30rem;margin-top: 5rem;">
-        <div class="alert alert-danger div-hover-danger" style="cursor: pointer;" (click)="onVPNClick()">
+        <!-- <div class="alert alert-danger div-hover-danger" style="cursor: pointer;" (click)="onVPNClick()">
           حتما فیلتر شکنتون رو روشن کنید. این برنامه متاسفانه در ایران کار نمیکنه (پارادوکس!)        
-        </div>
+        </div> -->
         <div class="alert alert-danger">
           حتما اعداد رو انگلیسی وارد کنید
         </div>
@@ -43,8 +43,8 @@
         <div class="alert alert-success div-hover" style="cursor: pointer;" (click)="onWhyClick()">
           اصلا چرا باید از این برنامه استفاده کنم؟
         </div>
-        <div class="alert alert-success" *ngIf="countUsers !== ''">
-          من تا الان {{ countUsers }} مختصات رو میشناسم
+        <div class="alert alert-success" *ngIf="countUsers !== '' && countLinks !== ''">
+          من تا الان {{ countUsers }} مختصات و {{ countLinks }} لینک رو میشناسم.
         </div>
       </div>
   
@@ -56,7 +56,7 @@
       <div class="col-sm" style="margin-top: 10rem;">
         <h1 style="color: white;">در مورد این برنامه</h1>
         <div class="alert alert-dark" style="line-height: 25px;">
-          خب، فرض کنید، به شما یک لکیشن دادن و میخواد به یک جایی توی تهران برید، و به یک سری از دلایل مثل طرح ترافیک یا شلوغی تهران نمیخواید از ماشین استفاده کنید و نتیجه میگیرید که استفاده از مترو سریعترین راهه. اینجاست که این برنامه به کمکتون میاد. کافیه با هر برنامه ای که دوست دارید(مثلا گوگل مپس) مختصات اون جایی که هستین رو تو این سایت وارد کنید و «محاسبه کن» رو بزنید، و حالا این برنامه نزدیکترین ایستگاه مترو رو به همراه یسری اطلاعات دیگه بهتون میگه😁.
+          خب، فرض کنید، به شما یک لکیشن دادن و میخواید به یک جایی توی تهران برید، و به یک سری از دلایل مثل طرح ترافیک یا شلوغی تهران نمیخواید از ماشین استفاده کنید و نتیجه میگیرید که استفاده از مترو سریعترین راهه. اینجاست که این برنامه به کمکتون میاد. کافیه با هر برنامه ای که دوست دارید(مثلا گوگل مپس) مختصات اون جایی که هستین رو تو این سایت وارد کنید و «محاسبه کن» رو بزنید، و حالا این برنامه نزدیکترین ایستگاه مترو رو به همراه یسری اطلاعات دیگه بهتون میگه😁.
         </div>
       </div>
     </div>

@@ -5,9 +5,9 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class CoordinatesService extends DataService {
+export class LinkService extends DataService {
 
   constructor(http: HttpClient) {
-    super('http://176.97.218.208:3000/api/coordinates/', http);
+    super('http://176.97.218.208:3000/api/link-coordinates', http);
   }
 }

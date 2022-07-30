@@ -12,6 +12,10 @@ export class DataService {
     return this.http.get(this.url);
   }
 
+  getSpecificData(urlValue: string) {
+    return this.http.get(this.url+'/'+urlValue);
+  }
+
   postData(data: any) {
     return this.http.post(this.url, data);
   }

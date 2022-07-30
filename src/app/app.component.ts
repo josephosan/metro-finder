@@ -1,4 +1,6 @@
 import { MapComponent } from './map/map.component';
+import { LinkService } from './services/link.service';
+import { LinkComponent } from './link/link.component';
 import { SuccessResultComponent } from './success-result/success-result.component';
 import { CoordinatesService } from './services/coordinates.service';
 import { ExplanationComponent } from './explanation/explanation.component';
@@ -17,13 +19,16 @@ export class AppComponent implements OnInit {
   errField: string = '';
   doneProc: string = 'done';
   countUsers: string = '';
+  countLinks: string = '';
 
   ngOnInit(): void {
     this.countUsersInDataBase();
+    this.countLinksInDataBase();
   }
 
   constructor(private matDialog: MatDialog
-            , private coordinateService: CoordinatesService) {
+            , private coordinateService: CoordinatesService
+            , private LinkService: LinkService) {
   }
 
   // metro form:
@@ -91,12 +96,13 @@ export class AppComponent implements OnInit {
     });
   }
 
-  onMapClick() {
-    this.matDialog.open(MapComponent, {
-      data: '',
-      width: "50rem"
+  onLinkClick() {
+    this.matDialog.open(LinkComponent, {
+      width: "30rem"
     });
+    this.countLinksInDataBase();
   }
+
 
   // submit button:
   onSubmit(data: FormGroup) {
@@ -124,10 +130,29 @@ export class AppComponent implements OnInit {
     )
   }
 
+  onMapClick() {
+    this.matDialog.open(MapComponent, {
+      width: "30rem"
+    });
+  }
+
+
+  // get some data:
   countUsersInDataBase() {
-    this.coordinateService.getData().subscribe(
+    this.coordinateService.getSpecificData('count?onlyCount=true').subscribe(
       (res: any) => {
         this.countUsers = res.count;
+      }, 
+      (err) => {
+        console.log(err);
+      }
+    )
+  }
+
+  countLinksInDataBase() {
+    this.LinkService.getSpecificData('count?onlyCount=true').subscribe(
+      (res: any) => {
+        this.countLinks = res.count;
       }, 
       (err) => {
         console.log(err);

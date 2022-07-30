@@ -10,6 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ExplanationComponent } from './explanation/explanation.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SuccessResultComponent } from './success-result/success-result.component';
+import { LinkComponent } from './link/link.component';
 import { MapComponent } from './map/map.component';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { MapComponent } from './map/map.component';
     InputLabelComponent,
     ExplanationComponent,
     SuccessResultComponent,
+    LinkComponent,
     MapComponent
   ],
   imports: [
