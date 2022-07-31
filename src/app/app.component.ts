@@ -179,7 +179,7 @@ export class AppComponent implements OnInit {
           this.usersGeoLocation = '';
           this.inputValue = '';
         } else {
-          this.usersGeoLocation = lat+','+lon;
+          this.usersGeoLocation = lat+','+lon+' ';
           this.inputValue = this.usersGeoLocation;
         }
       })
