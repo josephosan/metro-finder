@@ -178,11 +178,36 @@ export class AppComponent implements OnInit {
           console.log('Cannot calculate; user out of range.   ' + 'lat: ' + lat + ', lon: ' + lon);
           this.usersGeoLocation = '';
           this.inputValue = '';
+          this.timeOutLocaiton();
         } else {
           this.usersGeoLocation = lat+','+lon;
           this.inputValue = this.usersGeoLocation;
+          this.timeOutLocaiton();
         }
       })
     }, 5000);
+  }
+
+  timeOutLocaiton() {
+    setTimeout(() => {
+      if(this.usersGeoLocation) {
+        navigator.geolocation.getCurrentPosition((pos) => {
+          let lat = pos.coords.latitude;
+          let lon = pos.coords.longitude;
+  
+          if(lat > 50 || lon > 70 || lon < 0) {
+            console.log('Cannot calculate; user out of range.   ' + 'lat: ' + lat + ', lon: ' + lon);
+            this.usersGeoLocation = '';
+            this.inputValue = '';
+          } else {
+            this.usersGeoLocation = lat+','+lon;
+            this.inputValue = this.usersGeoLocation;
+          }
+        });
+        this.timeOutLocaiton();
+      } else {
+        console.log('stoping location rendering.');
+      }
+    }, 3000);
   }
 }
