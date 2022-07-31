@@ -113,7 +113,13 @@ export class AppComponent implements OnInit {
   onSubmit(data: FormGroup) {
     this.errField = '';
     this.doneProc = '';
-    this.coordinateService.postData(data.value).subscribe(
+    let dataToSend = data.value;
+    if(this.inputValue) {
+      dataToSend = {
+        coordinate: this.inputValue
+      }
+    }
+    this.coordinateService.postData(dataToSend).subscribe(
       (res) => {
         this.usersGeoLocation = '';
         this.inputValue = '';
@@ -180,12 +186,12 @@ export class AppComponent implements OnInit {
           this.inputValue = '';
           this.timeOutLocaiton();
         } else {
-          this.usersGeoLocation = lat+','+lon+' ';
+          this.usersGeoLocation = lat+','+lon;
           this.inputValue = this.usersGeoLocation;
           this.timeOutLocaiton();
         }
       })
-    }, 5000);
+    }, 3000);
   }
 
   timeOutLocaiton() {
@@ -201,13 +207,12 @@ export class AppComponent implements OnInit {
             this.inputValue = '';
           } else {
             this.usersGeoLocation = lat+','+lon;
-            this.inputValue = this.usersGeoLocation;
           }
         });
         this.timeOutLocaiton();
       } else {
         console.log('stoping location rendering.');
       }
-    }, 3000);
+    }, 5000);
   }
 }
