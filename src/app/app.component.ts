@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormGroup, FormControl } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,10 +21,14 @@ export class AppComponent implements OnInit {
   doneProc: string = 'done';
   countUsers: string = '';
   countLinks: string = '';
+  usersGeoLocation: string = '';
+  inputValue: string = '';
 
   ngOnInit(): void {
     this.countUsersInDataBase();
     this.countLinksInDataBase();
+
+    this.getUserLocation();
   }
 
   constructor(private matDialog: MatDialog
@@ -110,6 +115,8 @@ export class AppComponent implements OnInit {
     this.doneProc = '';
     this.coordinateService.postData(data.value).subscribe(
       (res) => {
+        this.usersGeoLocation = '';
+        this.inputValue = '';
         this.doneProc = 'done';
         this.matDialog.open(SuccessResultComponent, {
           data: res,
@@ -120,6 +127,7 @@ export class AppComponent implements OnInit {
         this.countUsersInDataBase();
       },
       (err) => {
+        console.log(err);
         this.doneProc = 'done';
         if(err.status === 400) {
           this.errField = 'با الگو همخوانی ندارد!';
@@ -158,5 +166,23 @@ export class AppComponent implements OnInit {
         console.log(err);
       }
     )
+  }
+
+  getUserLocation() {
+    setTimeout(() => {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        let lat = pos.coords.latitude;
+        let lon = pos.coords.longitude;
+
+        if(lat > 50 || lon > 70 || lon < 0) {
+          console.log('Cannot calculate; user out of range.   ' + 'lat: ' + lat + ', lon: ' + lon);
+          this.usersGeoLocation = '';
+          this.inputValue = '';
+        } else {
+          this.usersGeoLocation = lat+', '+lon;
+          this.inputValue = this.usersGeoLocation;
+        }
+      })
+    }, 5000);
   }
 }

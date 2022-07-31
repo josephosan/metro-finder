@@ -10,7 +10,11 @@
         <div class="alert alert-danger" *ngIf="errField !== ''" style="max-width: 30rem;">
           {{ errField }}
         </div>
+        <div class="alert alert-success" *ngIf="usersGeoLocation !== '' && !metroForm.touched" style="max-width: 30rem;">
+          لکیشن شما 👇
+        </div>
         <input
+          [value]="inputValue"
           placeholder="مثلا: 35.735352, 51.359679"
           type="text"
           formControlName="coordinate"
