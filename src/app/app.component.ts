@@ -150,6 +150,10 @@ export class AppComponent implements OnInit {
     });
   }
 
+  onLocationClick() {
+    this.getUserLocation();
+  }
+
 
   // get some data:
   countUsersInDataBase() {
@@ -191,7 +195,7 @@ export class AppComponent implements OnInit {
           this.timeOutLocaiton();
         }
       })
-    }, 3000);
+    }, 1000);
   }
 
   timeOutLocaiton() {

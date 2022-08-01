@@ -10,7 +10,7 @@
         <div class="alert alert-danger" *ngIf="errField !== ''" style="max-width: 30rem;">
           {{ errField }}
         </div>
-        <div class="alert alert-success" *ngIf="usersGeoLocation !== '' && !metroForm.touched" style="max-width: 30rem;">
+        <div class="alert alert-success" *ngIf="usersGeoLocation !== ''" style="max-width: 30rem;">
           لکیشن شما 👈 {{ usersGeoLocation }}
         </div>
         <input
@@ -27,7 +27,7 @@
   
         <button class="btn btn-success button-styling">محاسبه کن!</button>
         <button class="btn btn-primary button-styling" style="margin-right: 0.5rem;" type="button" (click)="onLinkClick()">از لینک استفاده میکنم</button>
-        <button class="btn btn-danger button-styling" style="margin-right: 0.5rem;" type="button" (click)="onUsageClick()">چطوریه؟</button>
+        <button class="btn btn-danger button-styling" style="margin-right: 0.5rem;" type="button" (click)="onLocationClick()">مختصات من</button>
       </form>
   
       <!-- explanation -->
