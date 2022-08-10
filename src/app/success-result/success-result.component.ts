@@ -11,10 +11,14 @@ export class SuccessResultComponent implements OnInit {
   motorcycleTime: string = '';
   carTime: string = '';
   distance: string = '';
+  responseValue: any;
+  googlePathUrl: string = '';
 
   constructor(@Inject(MAT_DIALOG_DATA) private data: any, 
   private matDialogRef: MatDialogRef<SuccessResultComponent>) {
     try {
+      this.responseValue = data;
+
       this.metroStation = data.myData.nearestStation.name;
       this.motorcycleTime = data.neshanData.motorcycle.rows[0].elements[0].duration.text;
       this.carTime = data.neshanData.car.rows[0].elements[0].duration.text;
@@ -25,11 +29,31 @@ export class SuccessResultComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.makePathUrl();
   }
 
   // click events:
   onUndrestandClick() {
     this.matDialogRef.close();
+  }
+
+
+  makePathUrl() {
+    try {
+      if(!this.responseValue) {
+        console.log('There is no response to use!');
+      } else {
+        // console.log(this.responseValue.neshanData.car.origin_addresses[0]);
+        // console.log(this.responseValue.neshanData.car.destination_addresses[0]);
+
+        let originAddress = this.responseValue.neshanData.car.origin_addresses[0];
+        let destinationAddress = this.responseValue.myData.nearestStation.coordinate;
+
+        this.googlePathUrl = `https://www.google.com/maps/dir/${originAddress}/${destinationAddress}/@35.7109242,51.2763546,13z/data=!4m2!4m1!3e2`
+      }
+    } catch(err) {
+      console.log(err);
+    }
   }
 
 }

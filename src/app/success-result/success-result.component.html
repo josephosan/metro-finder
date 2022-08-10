@@ -13,4 +13,8 @@
   </div>
   
   <button class="btn btn-success" (click)="onUndrestandClick()" style="margin-top: 2rem;">فهمیدم!</button>
+  <button class="btn btn-primary" style="margin-top: 2rem;margin-right: 1rem;margin-left: 1rem;" 
+    *ngIf="googlePathUrl !== ''">
+    <a [href]="googlePathUrl" target="_blank" style="color: white;text-decoration: none;">مسیرِ پیاده</a>
+  </button>
 </div>
