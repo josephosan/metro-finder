@@ -7,13 +7,25 @@ import { ExplanationComponent } from './explanation/explanation.component';
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormGroup, FormControl } from '@angular/forms';
-import { HttpResponse } from '@angular/common/http';
+import { animate, style, transition, trigger } from '@angular/animations';
+
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [
+    trigger('fade', [
+      transition('void => *', [
+        style({ opacity: 0}),
+        animate(150)
+      ]),
+      transition('* => void', [
+        animate(150, style({ opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class AppComponent implements OnInit {
   title = 'metro-finder';
@@ -29,11 +41,18 @@ export class AppComponent implements OnInit {
     this.countLinksInDataBase();
 
     this.getUserLocation();
+    this.isLoaded();
   }
 
   constructor(private matDialog: MatDialog
             , private coordinateService: CoordinatesService
             , private LinkService: LinkService) {
+  }
+
+  isLoaded() {
+    window.addEventListener("load", function (event) {
+      return event.returnValue;
+    });
   }
 
   // metro form:

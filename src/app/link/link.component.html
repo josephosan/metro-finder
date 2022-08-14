@@ -1,5 +1,6 @@
 <div class="container font-style" style="text-align: center;">
   <button class="btn btn-close" style="margin-bottom: 1rem;" (click)="onCloseClick()"></button>
+  <mat-progress-bar mode="indeterminate" *ngIf="doneProc !== 'done'" @fade></mat-progress-bar>
   <div class="alert alert-danger">
     اگه از اپلیکیشن گوگل مپس استفاده میکنید ممکنه لینک کار نکنه! <span style="text-decoration: underline;cursor: pointer;color: black;font-size: 600;" (click)="onWhyClick()">چرا؟</span>  
   </div>
@@ -11,7 +12,7 @@
   </div>
 
   <form class="col-sm" [formGroup]="metroForm" (ngSubmit)="onSubmit(metroForm)">
-    <div class="alert alert-danger" *ngIf="errField !== ''" style="max-width: 30rem;">
+    <div class="alert alert-danger" *ngIf="errField !== ''" style="max-width: 30rem;" @fade>
       {{ errField }}
     </div>
     <input
@@ -21,10 +22,9 @@
       class="form form-control"
       style="max-width: 30rem;">
 
-    <div class="alert alert-success" *ngIf="doneProc !== 'done'" style="max-width: 30rem;margin-top: 2rem;margin-bottom: 0;">
+    <div class="alert alert-success" *ngIf="doneProc !== 'done'" style="max-width: 30rem;margin-top: 1rem;margin-bottom: 0;" @fade>
       در حال محاسبه...
     </div>
-
       
     <button class="btn btn-success" style="margin-top: 1rem;">محاسبه کن!</button>
   </form>

@@ -1,3 +1,4 @@
+<mat-progress-bar mode="indeterminate" *ngIf="doneProc !== 'done' || !isLoaded" @fade></mat-progress-bar>
 <div class="image font-style">
   <div class="container" style="padding-top: 5rem;">
   
@@ -6,11 +7,11 @@
   
       <!-- the form -->
       <form class="col-sm" [formGroup]="metroForm" (ngSubmit)="onSubmit(metroForm)">
-        <h1 style="margin-bottom: 3rem;color: white;">نزدیکترین ایستگاه مترو به شما</h1>
-        <div class="alert alert-danger" *ngIf="errField !== ''" style="max-width: 30rem;">
+        <h1 style="margin-bottom: 3rem;color: white;" @fade>نزدیکترین ایستگاه مترو به شما</h1>
+        <div class="alert alert-danger" *ngIf="errField !== ''" style="max-width: 30rem;" @fade>
           {{ errField }}
         </div>
-        <div class="alert alert-success" *ngIf="usersGeoLocation !== ''" style="max-width: 30rem;">
+        <div class="alert alert-success" *ngIf="usersGeoLocation !== ''" style="max-width: 30rem;" @fade>
           موقعیت شما 👈 {{ usersGeoLocation }}
         </div>
         <input
@@ -21,7 +22,7 @@
           class="form form-control"
           style="max-width: 30rem;">
 
-          <div class="alert alert-success" *ngIf="doneProc !== 'done'" style="max-width: 30rem;margin-top: 2rem;margin-bottom: 0;">
+          <div class="alert alert-success" *ngIf="doneProc !== 'done'" style="max-width: 30rem;margin-top: 1rem;margin-bottom: 0;" @fade>
             در حال محاسبه...
           </div>
   
@@ -29,25 +30,25 @@
         <button class="btn btn-primary button-styling" style="margin-right: 0.5rem;" type="button" (click)="onLinkClick()">از لینک استفاده میکنم</button>
         <button class="btn btn-danger button-styling" style="margin-right: 0.5rem;" type="button" (click)="onLocationClick()">مختصات من</button>
       </form>
-  
+
       <!-- explanation -->
       <div class="col-sm" style="max-width: 30rem;margin-top: 5rem;">
         <!-- <div class="alert alert-danger div-hover-danger" style="cursor: pointer;" (click)="onVPNClick()">
           حتما فیلتر شکنتون رو روشن کنید. این برنامه متاسفانه در ایران کار نمیکنه (پارادوکس!)        
         </div> -->
-        <div class="alert alert-danger">
+        <div class="alert alert-danger" @fade>
           حتما اعداد رو انگلیسی وارد کنید
         </div>
-        <div class="alert alert-warning">
+        <div class="alert alert-warning" @fade>
           برای نمونه مختصات باید اینجوری باشه: 35.735352, 51.359679
         </div>
-        <div class="alert alert-success div-hover" style="cursor: pointer;" (click)="onUsageClick()">
+        <div class="alert alert-success div-hover" style="cursor: pointer;" (click)="onUsageClick()" @fade>
           نحوه‌ی استفاده
         </div>
-        <div class="alert alert-success div-hover" style="cursor: pointer;" (click)="onWhyClick()">
+        <div class="alert alert-success div-hover" style="cursor: pointer;" (click)="onWhyClick()" @fade>
           اصلا چرا باید از این برنامه استفاده کنم؟
         </div>
-        <div class="alert alert-success" *ngIf="countUsers !== '' && countLinks !== ''">
+        <div class="alert alert-success" *ngIf="countUsers !== '' && countLinks !== ''" @fade>
           من تا الان {{ countUsers }} مختصات و {{ countLinks }} لینک رو میشناسم.
         </div>
       </div>

@@ -4,12 +4,23 @@ import { LinkService } from './../services/link.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
-import { validateVerticalPosition } from '@angular/cdk/overlay';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-link',
   templateUrl: './link.component.html',
-  styleUrls: ['./link.component.css']
+  styleUrls: ['./link.component.css'],
+  animations: [
+    trigger('fade', [
+      transition('void => *', [
+        style({ innerHeight: 0, outerHeight: 0 }),
+        animate(150)
+      ]),
+      transition('* => void', [
+        animate(150, style({ innerHeight: 0, outerHeight: 0 }))
+      ])
+    ])
+  ]
 })
 export class LinkComponent implements OnInit {
   errField: string = '';

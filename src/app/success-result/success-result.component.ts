@@ -49,7 +49,7 @@ export class SuccessResultComponent implements OnInit {
         let originAddress = this.responseValue.neshanData.car.origin_addresses[0];
         let destinationAddress = this.responseValue.myData.nearestStation.coordinate;
 
-        this.googlePathUrl = `https://www.google.com/maps/dir/${originAddress}/${destinationAddress}/@35.7109242,51.2763546,13z/data=!4m2!4m1!3e2`
+        this.googlePathUrl = `https://www.google.com/maps/dir/${originAddress}/${destinationAddress}/data=!4m2!4m1!3e2`
       }
     } catch(err) {
       console.log(err);
