@@ -106,7 +106,7 @@ export class AppComponent implements OnInit {
 
   onApiClick() {
     this.matDialog.open(ExplanationComponent, {
-      data: `در این برنامه از یک Api به نام metro-finder استفاده شده که رایگان هم هست، در این Api مختصات همه مترو های تهران به صورت decimal در دسترس عموم هست. برای اطلاعات بیشتر به https://github.com/josephosan/metro-finder-api مراجعه کنید.`,
+      data: `در این برنامه از یک Api به نام metro-finder استفاده شده که رایگان هم هست، در این Api مختصات همه مترو های تهران به صورت decimal در دسترس عموم هست. برای اطلاعات بیشتر به <a href="https://github.com/josephosan/metro-finder-api">LINK</a> مراجعه کنید.`,
       width: "30rem",
       panelClass: 'background-color-changer'
     });
